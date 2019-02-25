@@ -2,7 +2,7 @@
 
 ### A season simulator that compares performance of the Elo ratings system to Win-Loss record prediction
 
-##### This post is a compliment to [my medium post](https://medium.com/p/d46ee57c1314/edit)
+##### This post is a compliment to [my medium post](https://medium.com/@BlakeAtkinson/rating-sports-teams-elo-vs-win-loss-d46ee57c1314).
 
 To simulate a season, simply run `python3 season.py` in the terminal (assuming appropriate libraries are installed).
 
