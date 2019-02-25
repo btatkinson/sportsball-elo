@@ -4,33 +4,12 @@ import random
 import statistics
 
 from player import Player
+from settings import *
 from elo import Elo
 from tqdm import tqdm
 # for fake player names
 from faker import Faker
 fake = Faker()
-
-season_settings = {
-    # must be even number of players
-    'num_players':32,
-    'num_games':1000,
-    # average ratings for the teams
-    'avg_rtg':100,
-    # standard deviation of ratings (higher -> more difference in player skill)
-    'std_dev': 5,
-    # game by game variation amount:
-    'game_var':5.5,
-    # after each game, how much does the true rating change?
-    # basically a random walk, so we will expect sqrt(num_games) deviation
-    # if num_games == 1000, average end of season deviation will be sqrt(1000) * nudge value,
-    # so about 8 in the default example
-    'rtg_nudge':0.5
-}
-elo_settings = {
-    'init_elo': 1500,
-    'K': 0.5,
-    'beta':400
-}
 
 # array to store players
 league = []
@@ -82,40 +61,6 @@ def play_game(p1, p2, game_var):
     p1_game_score = int(np.round(random.gauss(p1.rtg,game_var),0))
     p2_game_score = int(np.round(random.gauss(p2.rtg,game_var),0))
     return p1_game_score, p2_game_score
-
-##############
-# experiment #
-##############
-
-# def exp_play_game(p1, p2, game_var):
-#
-#     # add random variation
-#     p1_game_score = int(np.round(random.gauss(p1,game_var),0))
-#     p2_game_score = int(np.round(random.gauss(p2,game_var),0))
-#     return p1_game_score, p2_game_score
-#
-# def expect(elo_1, elo_2):
-#     diff = float(elo_2) - float(elo_1)
-#     f_factor = 2 * 400
-#     return 1 / (1 + 10 ** (diff / f_factor))
-#
-# print(expect(1970,991))
-# num_tries = 1000
-# game_log = []
-# for x in range(num_tries):
-#     p1, p2 = exp_play_game(110,92,7.5)
-#     if p1 > p2:
-#         game_log.append(1)
-#     elif p2 > p1:
-#         game_log.append(0)
-#     else:
-#         game_log.append(0.5)
-# print(np.sum(game_log)/num_tries)
-# raise ValueError
-
-##################
-# end experiment #
-##################
 
 def update_players(p1, p2, p1_score, p2_score):
 
@@ -217,8 +162,8 @@ total_wl_error = league_table['WL error'].sum()
 
 average_elo_error = np.round(total_elo_error/season_settings['num_games']/season_settings['num_players'],3)
 average_wl_error = np.round(total_wl_error/season_settings['num_games']/season_settings['num_players'],3)
-print(average_elo_error)
-print(average_wl_error)
+print("The error for your custom Elo system: " + str(average_elo_error))
+print("The error for Win-Loss predictions: " + str(average_wl_error))
 
 
 
