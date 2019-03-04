@@ -1,8 +1,6 @@
 import numpy as np
 import pandas as pd
 
-# from season import elo_settings
-
 class Elo(object):
     """docstring for Elo."""
     def __init__(self, elo_1, elo_2, score_1, score_2, k, beta):
@@ -31,7 +29,7 @@ class Elo(object):
 
     def expect(self, elo_1, elo_2):
         diff = float(self.elo_2) - float(self.elo_1)
-        f_factor = 2 * self.beta
+        f_factor = self.beta
         return 1 / (1 + 10 ** (diff / f_factor))
 
     def p1_adjust(self):

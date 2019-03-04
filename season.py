@@ -38,8 +38,6 @@ league_table = league_table.sort_values(by='True Rating', ascending=False)
 
 print(league_table)
 
-# play season
-
 def create_matchups(league):
     pairs = []
     random.shuffle(league)
@@ -160,8 +158,8 @@ print(league_table)
 total_elo_error = league_table['Elo error'].sum()
 total_wl_error = league_table['WL error'].sum()
 
-average_elo_error = np.round(total_elo_error/season_settings['num_games']/season_settings['num_players'],3)
-average_wl_error = np.round(total_wl_error/season_settings['num_games']/season_settings['num_players'],3)
+average_elo_error = np.round(total_elo_error/season_settings['num_games']/season_settings['num_players']/2,3)
+average_wl_error = np.round(total_wl_error/season_settings['num_games']/season_settings['num_players']/2,3)
 print("The error for your custom Elo system: " + str(average_elo_error))
 print("The error for Win-Loss predictions: " + str(average_wl_error))
 
